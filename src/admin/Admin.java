@@ -23,7 +23,8 @@ public class Admin extends Input {
             System.out.println("5.Change the security deposite");
             System.out.println("6.Report");
             System.out.println("7.Billing");
-            System.out.println("8.Log out");
+            System.out.println("8.add admin");
+            System.out.println("9.Log out");
             System.out.print("\nEnter your choice: ");
             int choice=sc.nextInt();
             sc.nextLine();
@@ -217,6 +218,22 @@ public class Admin extends Input {
                 }
             }
             else if(choice==8){
+                System.out.print("\nEnter Email: ");
+                String email=sc.nextLine();
+                System.out.print("Enter Name: ");
+                String name=sc.nextLine();
+                System.out.print("Enter Phone no: ");
+                String phone=sc.nextLine();
+                System.out.print("Enter Passward: ");
+                String passward=sc.nextLine();
+                try{
+                    insert.CreateUser(name, email, passward, phone,"Admin");
+                }
+                catch(SQLException err){
+                    System.out.println(err);
+                }
+            }
+            else if(choice==9){
                 Cookie.userId=-1;
                 break;
             }

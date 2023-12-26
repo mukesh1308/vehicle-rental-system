@@ -54,7 +54,7 @@ public class App extends Input{
                 String passward=sc.nextLine();
                 try{
                     InsertData insert=new InsertData();
-                    insert.CreateUser(name, email, passward, phone,"Admin");
+                    insert.CreateUser(name, email, passward, phone,"Renter");
                 }
                 catch(SQLException err){
                     System.out.println(err);
