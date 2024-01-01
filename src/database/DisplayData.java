@@ -13,7 +13,6 @@ public class DisplayData extends DatabaseConnect{
     PreparedStatement showCart;
     PreparedStatement showPreviousRent;
     public DisplayData() throws SQLException{
-        super();
         displayById=conn.prepareStatement("SELECT V.Number_plate,M.Vehicle_name,M.Rental_charge,V.Distance_covered,V.Last_service_at FROM Vehicle V JOIN Vehicle_modal M USING(Vehicle_id) WHERE Vehicle_id=? AND V.Number_plate NOT IN(SELECT Number_plate FROM Renting WHERE Return_date IS NULL) AND ((M.Vehicle_type='four wheeler' AND (V.Distance_covered-V.Last_service_at)<3000) OR (M.Vehicle_type='two wheeler' AND (V.Distance_covered-V.Last_service_at)<1500))");
         showCart=conn.prepareStatement("SELECT V.Number_plate,M.Vehicle_name,M.Rental_charge FROM Vehicle V JOIN Vehicle_modal M USING(Vehicle_id) WHERE V.Number_plate IN (SELECT Number_plate FROM Cart WHERE User_id=?)");
         showPreviousRent=conn.prepareStatement("SELECT O.Order_id,R.Number_plate,R.Start_distance,R.End_distance,R.Damage,R.Rented_date,R.Rented_date,P.Amount FROM Renting R JOIN Orders O USING(Order_id) JOIN Payment P USING(Payment_id) WHERE O.User_id=?");
@@ -57,7 +56,7 @@ public class DisplayData extends DatabaseConnect{
     }
     public ArrayList<Bill> genrateBill(int OrderID) throws SQLException{
         ArrayList<Bill> arr=new ArrayList<>();
-        ResultSet res=statement.executeQuery("SELECT R.damage,DATEDIFF(R.Rented_date,R.Return_date),M.Rental_charge,(R.End_distance-R.Start_distance) FROM Renting R JOIN Vehicle V USING(Number_plate) JOIN Vehicle_modal M USING(Vehicle_id) WHERE R.Order_id="+OrderID);
+        ResultSet res=statement.executeQuery("SELECT R.damage,DATEDIFF(R.Return_date,R.Rented_date),M.Rental_charge,(R.End_distance-R.Start_distance) FROM Renting R JOIN Vehicle V USING(Number_plate) JOIN Vehicle_modal M USING(Vehicle_id) WHERE R.Order_id="+OrderID);
         while(res.next()){
             arr.add(new Bill(res.getInt(2),res.getString(1),res.getInt(3),res.getInt(4)));
         }

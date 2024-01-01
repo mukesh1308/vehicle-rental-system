@@ -9,7 +9,6 @@ public class DeleteDate extends DatabaseConnect{
     PreparedStatement deleteVehical;
     PreparedStatement deleteFromCart;
     public DeleteDate()throws SQLException{
-        super();
         deleteVehical=conn.prepareStatement("DELETE FROM Vehicle WHERE Number_plate=?");
         deleteFromCart=conn.prepareStatement("DELETE FROM Cart WHERE User_id=? AND Number_plate=?");
     }

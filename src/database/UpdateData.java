@@ -12,7 +12,6 @@ public class UpdateData  extends DatabaseConnect{
     PreparedStatement updateSecurityDeposit;
     PreparedStatement updateBill;
     public UpdateData() throws SQLException{
-        super();
         updateAvailability=conn.prepareStatement("UPDATE Vehicle SET Availability=? WHERE Number_plate=?");
         updateSecurityDeposit=conn.prepareStatement("UPDATE User SET Security_deposit=? WHERE User_id=?");
         updateBill=conn.prepareStatement("UPDATE Renting SET End_distance=? ,Damage=?,Return_date=CURRENT_TIMESTAMP WHERE Order_id=? AND Number_plate=?");

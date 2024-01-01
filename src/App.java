@@ -1,6 +1,7 @@
 import java.sql.SQLException;
 
 import admin.Admin;
+import database.DatabaseConnect;
 import database.InsertData;
 import database.Login;
 import resource.Input;
@@ -8,6 +9,12 @@ import user.User;
 
 public class App extends Input{
     public static void main(String[] args){
+        try{
+            DatabaseConnect.connect();
+        }
+        catch(SQLException err){
+            System.out.println("Database not connected");
+        }
         while(true){
             System.out.println("\nWelcome to Vehicle Rental System");
             System.out.println("1.Login");

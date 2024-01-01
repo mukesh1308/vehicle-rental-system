@@ -18,7 +18,6 @@ public class InsertData extends DatabaseConnect {
     PreparedStatement billInsert;
     PreparedStatement paymentInsert;
     public InsertData() throws SQLException{
-        super();
         loginInsert=conn.prepareStatement("INSERT INTO LOGIN(Email,Passward,User_id) VALUES(?,?,?)");
         userInsert=conn.prepareStatement("INSERT INTO User(User_name,Phone_no,Role) VALUES(?,?,?)");
         vehicleInsert=conn.prepareStatement("INSERT INTO Vehicle VALUES (?,?,?,?,1)");

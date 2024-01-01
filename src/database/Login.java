@@ -7,9 +7,6 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import resource.Cookie;
 
 public class Login extends DatabaseConnect {
-    public Login() throws SQLException{
-        super();
-    }
     public int login(String email,String passward) throws SQLException{
         ResultSet res=statement.executeQuery("SELECT L.Passward,U.ROLE,L.User_id FROM Login L JOIN User U USING(User_id) WHERE L.Email='"+email+"'");
         if(res.next()){

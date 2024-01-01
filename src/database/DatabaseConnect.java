@@ -7,10 +7,11 @@ import java.sql.Statement;
 
 import resource.DB_data;
 
-class DatabaseConnect{
-    Connection conn=null;
-    Statement statement;
-    DatabaseConnect() throws SQLException{
+public class DatabaseConnect{
+    protected static Connection conn=null;
+    protected static Statement statement;
+    DatabaseConnect(){}
+    public static void connect()throws SQLException{
         conn=DriverManager.getConnection(DB_data.dbURL,DB_data.user, DB_data.passward);
         statement=conn.createStatement();
     }
